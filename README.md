@@ -14,6 +14,35 @@ loguot
 
 login
 
+if use a exeternal ssd:
+
+    parted
+    
+    select /dev/sdx
+    
+    mklabel gpt
+
+    unit %
+
+    mkpart primary ext4 0 100
+
+    mkfs.ext4 /dev/sdxy
+
+
+create a data dir:
+
+    mkdir /data
+
+edit fstab:
+
+    blkid
+
+    nano /etc/fstb
+
+create a link:
+
+    ln -s /data/bitcoin /home/bitcoin/.bitcoin
+
 
 to complete...
 
@@ -21,7 +50,7 @@ inizializzo nodo manager swarm:
 
 da utente non root
 
-    docker swarm init
+    docker swarm init 0 2048G
 inizializzo nodo worker:
 
 docker join ... 
