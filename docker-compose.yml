@@ -1,0 +1,15 @@
+networks:
+  nodo:
+    external: true
+
+services:
+  tor:
+    container_name: tor
+    image: tor
+    restart: always
+    volumes:
+      - /var/lib/tor/
+      - $PWD/.tor:/var/lib/tor/
+    networks:
+      nodo:
+        ipv4_address: 10.0.1.1

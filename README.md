@@ -3,7 +3,7 @@ install docker:
     su -
 
     apt install curl -y
-    
+ 
     curl -ssl https://get.docker.com | bash
 
 add user to docker group:
@@ -17,9 +17,9 @@ login
 if use a exeternal ssd:
 
     parted
-    
+
     select /dev/sdx
-    
+
     mklabel gpt
 
     unit %
@@ -39,28 +39,34 @@ edit fstab:
 
     nano /etc/fstb
 
-create a link:
+creates link:
 
-    ln -s /data/bitcoin /home/bitcoin/.bitcoin
+    ln -s /data/dir /home/bitcoin/.dir
 
+inizialize swarm manager:
 
-to complete...
+    docker swarm init
 
-inizializzo nodo manager swarm:
-
-da utente non root
-
-    docker swarm init 0 2048G
-inizializzo nodo worker:
-
-docker join ... 
-se non ho il comando:
+inizialize worker node(s) if present(s):
 
     docker swarm join-token worker
+    docker join...
 
 create overlay nodo network:
 
     docker network create --driver=overlay --subnet=10.0.1.0/24 --gateway=10.0.1.254 --attachable nodo
+
+create tor image:
+
+    cd dockerfile/tor
+    docker build --build-arg pass=password -t tor .
+
+create bitcoin image:
+
+
+#############
+to complete
+#############
 
 creo file bitcoin.conf
 

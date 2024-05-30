@@ -1,0 +1,11 @@
+SocksPort 0.0.0.0:9050
+SocksPolicy accept 0.0.0.0
+ControlPort 0.0.0.0:9051
+
+### per creare l'hash della password usare: tor --hash-password <secret>
+HashedControlPassword
+
+### HIDDEN SERVICES
+HiddenServiceDir /var/lib/tor/bitcoin_hidden_service
+HiddenServiceVersion 3
+HiddenServicePort 8333 10.0.1.2:8333
