@@ -91,6 +91,9 @@ create electrs image(require a lot of CPU):
 
 create nginx image:
 
+    cd dockerfile/nginx
+    modify the file if needed
+    docker build -t nginx .
 
 
 
