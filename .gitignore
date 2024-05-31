@@ -1,1 +1,17 @@
 .token
+
+.bitcoin/bitcoin.conf
+.bitcoin/.cookie
+.bitcoin/.lock
+.bitcoin/banlist.json
+.bitcoin/bitcoind.pid
+.bitcoin/locks
+.bitcoin/chainstate
+.bitcoin/debug.log
+.bitcoin/fee_estimates.dat
+.bitcoin/indexes
+.bitcoin/mempool.*
+.bitcoin/peers.dat
+.bitcoin/settings.json
+
+.electrs/db/

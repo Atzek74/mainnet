@@ -59,32 +59,58 @@ create overlay nodo network:
 create tor image:
 
     cd dockerfile/tor
+    modify the file torrc.sample
     docker build --build-arg pass=password -t tor .
+
+test tor:
+
+from mainnet directory run:
+
+    docker run -it --rm  --name tor --network nodo --ip=10.0.1.1 -v $PWD/.tor:/var/lib/tor/ tor 
+
+when tor is syncronize 100% ctrl+c
 
 create bitcoin image:
 
+    cd dockerfile/bitcoin
+    docker build -t bitcoind .
 
-#############
-to complete
-#############
+create electrs image(require a lot of CPU):
 
-creo file bitcoin.conf
+    cd dockerfile/electrs
+    docker build -t electrs .
+
+create nginx image:
+
+
+
+
+
+
+create bitcoin.conf
 
     cd .bitcoin
+    cp bitcoin.sample bitcoin.conf
     docker pull python
     docker run -it --rm python bash
     wget https://raw.githubusercontent.com/bitcoin/bitcoin/master/share/rpcauth/rpcauth.py
     python3 rpcauth.py admin password
     exit
 
-modifty bitcoin.sample
+    modify bitcoin.conf
+    (with root user) 	cd ..
+			cat .tor/bitcoin_hidden_service/hostname 
+    cd .bitcoin
+    modify bitcoin.conf
 
-    docker cp tor:/var/lib/tor/bitcoin_hidden_service/hostname ./hostname
+#############
+to complete
+#############
 
 
-modifty bitcoin.sample
+
 
 copio eventuali dati
 
-rsync -a --remove-source-files --progress ...
+rsync -a (--remove-source-files) --progress ...
 avvio container

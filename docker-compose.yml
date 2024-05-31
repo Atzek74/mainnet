@@ -1,15 +1,38 @@
 networks:
+
   nodo:
     external: true
 
 services:
-  tor:
-    container_name: tor
-    image: tor
+
+#  tor:
+#    container_name: tor
+#    image: tor
+#    restart: always
+#    volumes:
+#      - /var/lib/tor/
+#      - $PWD/.tor:/var/lib/tor/
+#    networks:
+#      nodo:
+#        ipv4_address: 10.0.1.1
+
+  bitcoind:
+    container_name: bitcoind
+    image: bitcoind
     restart: always
     volumes:
-      - /var/lib/tor/
-      - $PWD/.tor:/var/lib/tor/
+      - $PWD/.bitcoin:/root/.bitcoin
     networks:
       nodo:
-        ipv4_address: 10.0.1.1
+        ipv4_address: 10.0.1.2
+
+  electrs:
+    container_name: electrs
+    image: electrs
+    restart: always
+    volumes:
+      - $PWD/.electrs:/root/.electrs
+    networks:
+      nodo:
+        ipv4_address: 10.0.1.3
+
