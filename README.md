@@ -31,7 +31,7 @@ if use a exeternal ssd:
 
 create a data dir:
 
-    mkdir /data
+    mkdir /data/xyz
 
 edit fstab:
 
@@ -41,7 +41,16 @@ edit fstab:
 
 creates link:
 
-    ln -s /data/dir /home/bitcoin/.dir
+    ln -s /data/xyz /home/abc/.xyz
+
+
+if not use a exeternal ssd:
+
+
+  create config dir .xyz (no for nginx)
+
+  cp from file/xyz into .xyz
+
 
 inizialize swarm manager:
 
