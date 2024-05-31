@@ -1,0 +1,25 @@
+# Bitcoin daemon
+server=1
+txindex=1
+
+#Network
+v2transport=1
+listen=1
+
+#Tor -> if only clearnet comment all
+
+listenonion=true
+proxy=tor:9050
+onlynet=onion
+externalip=
+
+
+# Connections
+rpcauth=
+
+zmqpubrawblock=tcp://0.0.0.0:28332
+zmqpubrawtx=tcp://0.0.0.0:28333
+
+
+rpcallowip=0.0.0.0/0
+rpcbind=0.0.0.0
