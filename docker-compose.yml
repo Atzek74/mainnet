@@ -5,16 +5,16 @@ networks:
 
 services:
 
-#  tor:
-#    container_name: tor
-#    image: tor
-#    restart: always
-#    volumes:
-#      - /var/lib/tor/
-#      - $PWD/.tor:/var/lib/tor/
-#    networks:
-#      nodo:
-#        ipv4_address: 10.0.1.1
+  tor:
+    container_name: tor
+    image: tor
+    restart: always
+    volumes:
+      - /var/lib/tor/
+      - $PWD/.tor:/var/lib/tor/
+    networks:
+      nodo:
+        ipv4_address: 10.0.1.1
 
   bitcoind:
     container_name: bitcoind
@@ -36,13 +36,42 @@ services:
       nodo:
         ipv4_address: 10.0.1.3
 
+  lnd:
+    container_name: lnd
+    image: lnd
+    restart: always
+    volumes:
+      - $PWD/.lnd:/root/.lnd
+    ports:
+      - 10009:10009
+    networks:
+      nodo:
+        ipv4_address: 10.0.1.4
+
+  rtl:
+    container_name: rtl
+    image: rtl
+   # depends_on:
+   #   - lnd
+    restart: always
+    volumes:
+      - $PWD/.rtl/RTL:/RTL
+      - $PWD/.lnd:/LND
+    #  - $PWD/.loop:/LOOP
+    networks:
+      nodo:
+        ipv4_address: 10.0.1.6
+
   nginx:
     container_name: nginx
     image: nginx
+
+
     restart: always
     ports:
       - 50002:50002
       - 4002:4002
+      - 443:443
     networks:
       nodo:
         ipv4_address: 10.0.1.10
