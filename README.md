@@ -52,18 +52,24 @@ if not use a exeternal ssd:
   cp from file/xyz into .xyz
 
 
-inizialize swarm manager:
+inizialize swarm MANAGER!!!:
 
     docker swarm init
 
-inizialize worker node(s) if present(s):
+create overlay nodo network (ONLY FOR THE MANAGER NODE!!!!!):
+
+    docker network create --driver=overlay --subnet=10.0.1.0/24 --gateway=10.0.1.254 --attachable nodo
+
+
+inizialize WORKER!!! node(s) if present(s):
 
     docker swarm join-token worker
     docker join...
 
-create overlay nodo network:
+run a busybox container in the WORKER node:
 
-    docker network create --driver=overlay --subnet=10.0.1.0/24 --gateway=10.0.1.254 --attachable nodo
+    docker run -it -d --network nodo --ip <ip address> busybo
+
 
 create tor image:
 
