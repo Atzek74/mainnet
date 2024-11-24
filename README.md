@@ -14,45 +14,9 @@ loguot
 
 login
 
-if use a exeternal ssd:
-
-    parted
-
-    select /dev/sdx
-
-    mklabel gpt
-
-    unit %
-
-    mkpart primary ext4 0 100
-
-    mkfs.ext4 /dev/sdxy
 
 
-create a data dir:
-
-    mkdir /data/xyz
-
-edit fstab:
-
-    blkid
-
-    nano /etc/fstb
-
-creates link:
-
-    ln -s /data/xyz /home/abc/.xyz
-
-
-if not use a exeternal ssd:
-
-
-  create config dir .xyz (no for nginx)
-
-  cp from file/xyz into .xyz
-
-
-inizialize swarm MANAGER!!!:
+inizialize swarm in the MANAGER node !!!:
 
     docker swarm init
 
@@ -63,8 +27,8 @@ create overlay nodo network (ONLY FOR THE MANAGER NODE!!!!!):
 
 inizialize WORKER!!! node(s) if present(s):
 
-    docker swarm join-token worker
-    docker join...
+    run in manager node: docker swarm join-token worker
+    run the output on worker node
 
 run a busybox container in the WORKER node:
 
@@ -125,10 +89,18 @@ create bitcoin.conf
 to complete
 #############
 
-
-
-
-copio eventuali dati
+to copy data:
 
 rsync -a (--remove-source-files) --progress ...
-avvio container
+
+create volumes for data
+
+	docker volume create <volume-name>
+
+ 	in docker-compose:
+  		volumes:
+  		  <volume-name>:
+    		    external: true
+
+
+
