@@ -98,6 +98,7 @@ create volumes for data
 	docker volume create <volume-name>
 
 in docker-compose:
+
 	volumes:
           <volume-name>:
     	    external: true
