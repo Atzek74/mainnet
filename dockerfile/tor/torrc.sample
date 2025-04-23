@@ -6,6 +6,7 @@ ControlPort 0.0.0.0:9051
 HashedControlPassword
 
 ### HIDDEN SERVICES
-HiddenServiceDir /var/lib/tor/bitcoin_hidden_service
-HiddenServiceVersion 3
-HiddenServicePort 8333 10.0.1.2:8333
+
+## Bitcoin Core P2P Hidden Service
+HiddenServiceDir /var/lib/tor/app-bitcoin-p2p
+HiddenServicePort 8333 10.0.1.2:8334

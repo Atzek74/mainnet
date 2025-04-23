@@ -1,5 +1,4 @@
 # docker build --build-arg pass=password -t tor .
-# docker run -itd  --name tor --restart always --network nodo --ip=10.0.1.1 -v $PWD/.tor:/var/lib/tor/ tor
 
 FROM debian
 RUN apt update && apt -y upgrade
