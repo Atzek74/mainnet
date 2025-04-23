@@ -1,8 +1,23 @@
-install docker:
+install sudo:
 
     su -
+    
+    apt update
+    
+    apt install sudo
 
-    apt install curl -y
+    usermod -aG sudo <user>
+
+    exit
+
+logout
+
+login
+
+
+install docker:
+
+    sudo apt install curl -y
  
     curl -ssl https://get.docker.com | bash
 
@@ -15,25 +30,15 @@ loguot
 login
 
 
+create nodo network :
 
-inizialize swarm in the MANAGER node !!!:
+    docker network create --driver=bridge --subnet=10.0.1.0/24 --gateway=10.0.1.254 nodo
 
-    docker swarm init
+create volumes:
 
-create overlay nodo network (ONLY FOR THE MANAGER NODE!!!!!):
+    docker volume create bitcoin-data
 
-    docker network create --driver=overlay --subnet=10.0.1.0/24 --gateway=10.0.1.254 --attachable nodo
-
-
-inizialize WORKER!!! node(s) if present(s):
-
-    run in manager node: docker swarm join-token worker
-    run the output on worker node
-
-run a busybox container in the WORKER node:
-
-    docker run -it -d --network nodo --ip <ip address> busybo
-
+    docker volume create electra-data
 
 create tor image:
 
@@ -43,9 +48,7 @@ create tor image:
 
 test tor:
 
-from mainnet directory run:
-
-    docker run -it --rm  --name tor --network nodo --ip=10.0.1.1 -v $PWD/.tor:/var/lib/tor/ tor 
+    docker compose up tor 
 
 when tor is syncronize 100% ctrl+c
 
@@ -58,6 +61,12 @@ create electrs image(require a lot of CPU):
 
     cd dockerfile/electrs
     docker build -t electrs .
+
+
+#############
+to complete
+#############
+
 
 create nginx image:
 
@@ -84,10 +93,6 @@ create bitcoin.conf
 			cat .tor/bitcoin_hidden_service/hostname 
     cd .bitcoin
     modify bitcoin.conf
-
-#############
-to complete
-#############
 
 to copy data:
 
