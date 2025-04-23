@@ -1,25 +1,71 @@
 # Bitcoin daemon
+
 server=1
 txindex=1
 
-#Network
-v2transport=1
+#reindex=1
+#reindex-chainstate=1
+# Enable all compact filters.
+blockfilterindex=1
+
+# Keep the transaction memory pool below this many megabytes.
+maxmempool=300
+
+# Do not keep transactions in the mempool longer than this many hours.
+mempoolexpiry=336
+
+# Save the mempool on shutdown and load on restart.
+persistmempool=1
+
+# Maximum number of orphan transactions to be kept in memory.
+maxorphantx=100
+
+# Allow creation of legacy wallets (required for JoinMarket)
+deprecatedrpc=create_bdb
+
+# Network
+
+## Enable/disable incoming connections from peers.
 listen=1
+listenonion=1
 
-#Tor -> if only clearnet comment all
+## Connect to peers over the clearnet.
+onlynet=ipv4
+onlynet=ipv6
 
-listenonion=true
-proxy=tor:9050
+# Connect through <ip:port> SOCKS5 proxy.
+proxy=10.0.1.1:9050
+
+
+## Use separate SOCKS5 proxy <ip:port> to reach peers via Tor hidden services.
 onlynet=onion
-externalip=
+onion=10.0.1.1:9050
 
+## Tor control <ip:port> and password to use when onion listening enabled.
+torcontrol=10.0.1.1:9051
+torpassword=password
 
-# Connections
-rpcauth=
+# Activate v2 P2P
+#v2transport=1
 
-zmqpubrawblock=tcp://0.0.0.0:28332
-zmqpubrawtx=tcp://0.0.0.0:28333
+# Connections admin:password
+rpcauth=admin:hashedPassword
+zmqpubrawblock=tcp://10.0.1.2:28332
+zmqpubrawtx=tcp://10.0.1.2:28333
+whitelist=download@10.0.1.3          # for Electrs
 
+# Raspberry Pi optimizations
+maxconnections=125
+#maxuploadtarget=5000
 
-rpcallowip=0.0.0.0/0
-rpcbind=0.0.0.0
+# Initial block download optimizations
+#dbcache=2000
+#blocksonly=1
+
+[main]
+bind=0.0.0.0:8333
+bind=10.0.1.2:8334=onion
+
+rpcallowip=10.0.1.0/24
+rpcbind=10.0.1.2
+
