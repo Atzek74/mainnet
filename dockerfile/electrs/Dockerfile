@@ -13,7 +13,7 @@ RUN git clone --branch v"0.10.4"  https://github.com/romanz/electrs.git
 
 WORKDIR /rust/electrs
 RUN cargo build --locked --release
-RUN install -m 0755 -o root -g root -t /usr/local/bin rust/electrs/target/release/electrs
+RUN install -m 0755 -o root -g root -t /usr/local/bin /rust/electrs/target/release/electrs
 
 WORKDIR /root/.electrs
 
