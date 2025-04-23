@@ -38,7 +38,9 @@ create volumes:
 
     docker volume create bitcoin-data
 
-    docker volume create electra-data
+    docker volume create electrs-data
+
+    docker volume create lnd-data 
 
 create tor image:
 
