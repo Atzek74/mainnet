@@ -9,7 +9,7 @@ RUN apt install -y build-essential
 RUN apt install -y git 
 
 WORKDIR /rust
-RUN git clone --branch v"0.10.4"  https://github.com/romanz/electrs.git
+RUN git clone --branch v"0.10.9"  https://github.com/romanz/electrs.git
 
 WORKDIR /rust/electrs
 RUN cargo build --locked --release
