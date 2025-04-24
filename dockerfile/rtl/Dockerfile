@@ -1,3 +1,5 @@
+#docker build -t node .
+
 FROM node:latest
-WORKDIR /RTL
+WORKDIR /root/.rtl/RTL
 CMD ["node","rtl"]

@@ -82,11 +82,13 @@ from inside rtl-data volume
     
 exit
 
-    docker run --rm -it --volume rtl-data:/root/.rtl node bash
+    docker run --rm -it --volume --name node rtl-data:/root/.rtl node bash
 
     npm install --omit=dev --legacy-peer-deps
 
     ctrl P + Q
+ 
+     docker stop node
 
 
 
