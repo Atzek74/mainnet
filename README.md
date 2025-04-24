@@ -42,6 +42,8 @@ create volumes:
 
     docker volume create lnd-data 
 
+    docker volume create rtl-data
+
 create tor image:
 
     cd dockerfile/tor
@@ -63,6 +65,29 @@ create electrs image(require a lot of CPU):
 
     cd dockerfile/electrs
     docker build -t electrs .
+
+create node image
+
+    cd dockerfile/node
+    docker build -t node .
+
+from inside rtl-data volume
+
+    git clone https://github.com/Ride-The-Lightning/RTL.git
+    cd RTL
+    git checkout v0.15.4
+    
+    cp Sample-RTL-Config.json ./RTL-Config.json
+    nano RTL-Config.json
+    
+exit
+
+    docker run --rm -it --volume rtl-data:/root/.rtl node bash
+
+    npm install --omit=dev --legacy-peer-deps
+
+    ctrl P + Q
+
 
 
 #############
@@ -100,15 +125,23 @@ to copy data:
 
 rsync -a (--remove-source-files) --progress ...
 
-create volumes for data
 
-	docker volume create <volume-name>
 
-in docker-compose:
 
-	volumes:
-          <volume-name>:
-    	    external: true
+from rtl-vololume:
 
+clone repository
+
+git checkout
+
+cp Sample-RTL-Config.json ./RTL-Config.json
+
+nano RTL-Config.json
+
+docker run --rm -it --volume rtl-data:/root/.rtl node bash
+
+npm install --omit=dev --legacy-peer-deps
+
+ctrl P + Q
 
 
